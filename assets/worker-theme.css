@@ -1,0 +1,186 @@
+/* Orange brand, quiet work surfaces, and clear actions throughout the worker app. */
+body[data-app="worker"] {
+  --brand:#ce4000; --brand-hover:#b63800; --blue-soft:#fff2e8;
+  --orange:#b83a00; --orange-soft:#fff3e8; --line:#eee9e4;
+  --bg:#f5f5f7; --text:#302b28; --navy:#302b28; --muted:#74716f;
+  --worker-orange:#ff5000; --worker-ink:#b83a00; --worker-soft:#fff2e8;
+  --worker-border:#efe7df; --worker-on-orange:#391700; --radius:14px;
+}
+.worker-app .mobile-top { border-bottom:1px solid #f2ece6; }
+.worker-app .mini-nav h1 { font-size:18px; font-weight:650; }
+.worker-app .mini-nav>.icon-btn { color:var(--worker-ink); }
+.worker-app:is([data-page="home"],[data-page="orders"],[data-page="wallet"],[data-page="profile"]) .mobile-top { background:var(--worker-orange); border-bottom:0; }
+.worker-app:is([data-page="home"],[data-page="orders"],[data-page="wallet"],[data-page="profile"]) .statusbar { color:var(--worker-on-orange); }
+.worker-app:is([data-page="home"],[data-page="orders"],[data-page="wallet"],[data-page="profile"]) .mini-nav h1 { color:#fff; font-size:19px; font-weight:700; }
+.worker-app .mini-capsule { background:#ffffffe0; border-color:#e9e4de; }
+.worker-app:is([data-page="home"],[data-page="orders"],[data-page="wallet"],[data-page="profile"]) .mini-capsule { border-color:#ffffff80; }
+.worker-app .mobile-main .card { border:1px solid var(--worker-border); border-radius:14px; padding:17px 15px; }
+.worker-app .mobile-main .section { margin-top:22px; }
+.worker-app .section-heading { min-height:40px; margin-bottom:9px; }
+.worker-app .section-heading h2 { position:relative; padding-left:10px; font-size:17px; }
+.worker-app .section-heading h2:before { content:''; position:absolute; left:0; top:4px; width:3px; height:17px; border-radius:2px; background:var(--worker-orange); }
+.worker-app .section-heading .text-link { color:var(--muted); font-size:12px; }
+.worker-app .btn { border-radius:10px; min-height:46px; font-weight:550; }
+.worker-app .btn.small { min-height:44px; }
+.worker-app .btn.secondary { color:var(--worker-ink); border-color:#edc4a8; }
+.worker-app .btn.secondary:hover { background:#fff7f0; border-color:#d9986b; }
+.worker-app .btn.soft { color:var(--worker-ink); background:var(--worker-soft); }
+.worker-app .btn.plain,.worker-app .text-link { color:var(--worker-ink); }
+.worker-app .icon-btn:hover { background:var(--worker-soft); }
+.worker-app .badge:not(.green):not(.red):not(.gray) { color:#a73805; background:#fff0e2; }
+.worker-app .badge { font-size:11px; padding:4px 7px; border-radius:5px; }
+.worker-app .notice { background:#fff4eb; color:#7a4d30; border:1px solid #f5e4d6; border-radius:10px; }
+.worker-app .notice.green { background:#eff7f2; border-color:#dfede3; color:#2f715b; }
+.worker-app .notice.orange { background:#fff4e7; color:#80502b; }
+.worker-app .chip.active { color:var(--worker-ink); border-color:#efc09d; background:var(--worker-soft); }
+.worker-app .tab.active { color:var(--worker-ink); }
+.worker-app .tab.active:after { background:var(--worker-orange); }
+.worker-app .row-icon { color:var(--worker-ink); }
+.worker-app .avatar { background:var(--worker-soft); color:#b56837; }
+.worker-app .message-icon { color:var(--worker-ink); background:var(--worker-soft); }
+.worker-app input:focus,.worker-app textarea:focus,.worker-app select:focus { border-color:#d9986b; }
+.worker-app input[type="checkbox"],.worker-app input[type="radio"] { accent-color:var(--brand); }
+.worker-app .toggle-row input:focus-visible+.toggle { outline-color:var(--worker-ink); }
+.worker-app .timeline li.active .timeline-dot { box-shadow:0 0 0 3px #ffeadb; }
+.worker-app .stepper li.active>span { background:var(--brand); }
+.worker-app .stepper li.active small { color:var(--worker-ink); }
+.worker-app .progress>span { background:var(--worker-orange); }
+.worker-app .bar-col>span { background:#ffdfc9; }
+.worker-app .bar-col:nth-child(3n)>span { background:#ffb17b; }
+.worker-app .bar-col:last-child>span { background:var(--worker-orange); }
+.worker-app .bottom-nav { border-color:var(--worker-border); }
+.worker-app .bottom-nav a.active { color:var(--worker-ink); font-weight:600; }
+.worker-app .bottom-nav a.active .icon { color:var(--worker-orange); stroke-width:2.1; }
+.worker-app .mobile-footer { border-color:var(--worker-border); padding-top:10px; }
+.worker-app a:focus-visible,.worker-app button:focus-visible { outline-color:var(--worker-ink); }
+
+/* Workbench: availability and today's figures form one white panel in the orange head. */
+.worker-app[data-page="home"] .mobile-main { padding:0 12px 100px; }
+.worker-app .work-overview { margin:0 -12px; padding:6px 15px 24px; background:var(--worker-orange); }
+.worker-app .work-identity { min-height:58px; }
+.worker-app .work-identity strong { color:#fff; font-size:21px; font-weight:700; }
+.worker-app .work-identity small { color:var(--worker-on-orange); font-size:12px; }
+.worker-app .work-identity .avatar { width:46px; height:46px; background:#fff3e8; color:var(--worker-ink); }
+.worker-app .work-identity .icon-btn { color:#fff; }
+.worker-app .work-identity .icon-btn:hover { background:#e64700; }
+.worker-app .work-identity .unread-dot { width:8px; height:8px; background:#fff; border:2px solid var(--worker-orange); }
+.worker-app .work-metrics { gap:0; margin:14px 0 0; padding:20px 6px 16px; border-radius:14px 14px 0 0; background:#fff; }
+.worker-app .work-metrics a { min-height:58px; gap:6px; min-width:0; border-right:1px solid #f1eae4; }
+.worker-app .work-metrics a:last-child { border:0; }
+.worker-app .work-metrics strong { font-size:25px; font-weight:650; }
+.worker-app .work-metrics>a:first-child strong { color:var(--worker-ink); }
+.worker-app .work-metrics span { color:var(--muted); font-size:11px; }
+.worker-app .online-strip { padding:11px 15px 13px; background:#fff; border-top:1px solid #f3ede7; border-radius:0 0 14px 14px; }
+.worker-app .online-strip strong { font-size:14px; font-weight:600; color:var(--text); }
+.worker-app .online-strip p { font-size:11px; color:var(--muted); }
+.worker-app .online-strip .toggle { background:#dcd7d2; }
+.worker-app .online-strip input:checked+.toggle { background:var(--brand); }
+.worker-app .work-quick-links { margin:14px 0 16px; padding:15px 6px; border:1px solid var(--worker-border); border-radius:14px; gap:5px; }
+.worker-app .work-quick-links a { gap:8px; min-height:66px; font-size:12px; }
+.worker-app .work-quick-icon { display:flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:12px; background:var(--worker-soft); }
+.worker-app .work-quick-icon .icon { color:var(--worker-ink); }
+.worker-app .work-quick-links a:first-child .work-quick-icon { background:var(--worker-orange); }
+.worker-app .work-quick-links a:first-child .icon { color:#fff; }
+.worker-app[data-page="home"] .section-heading { margin-bottom:7px; }
+.worker-app[data-page="home"] .section { margin-top:16px; }
+
+/* Order cards keep the amount separate from the action, including the current job. */
+.worker-app .job-card { position:relative; border:1px solid var(--worker-border); border-radius:14px; padding:9px 15px 15px; margin-bottom:12px; overflow:hidden; }
+.worker-app .job-card.is-current { border-color:#f4bc92; box-shadow:0 3px 10px #a94c0010; }
+.worker-app .job-card.is-current:before { content:''; position:absolute; left:0; top:16px; bottom:16px; width:3px; border-radius:2px; background:var(--worker-orange); }
+.worker-app .job-meta { min-height:47px; padding:0 0 6px; gap:8px; border-color:#f2ece6; }
+.worker-app .job-meta .text-link { min-height:44px; padding:0; }
+.worker-app .job-card .match { color:#8b582e; font-size:12px; }
+.worker-app .job-card h3 { font-size:17px; font-weight:650; margin:13px 0 12px; }
+.worker-app .job-card .job-body { display:block; }
+.worker-app .job-card p { font-size:12px; gap:7px; margin-top:8px; line-height:1.7; color:#6e6864; }
+.worker-app .job-card p>span:first-of-type { min-width:0; overflow-wrap:anywhere; }
+.worker-app .job-card p>.icon { color:#a2836f; margin-top:3px; }
+.worker-app .job-card .job-time { align-items:center; flex-wrap:wrap; }
+.worker-app .job-card .job-time>.icon { margin-top:0; }
+.worker-app .job-card .job-distance { margin-left:auto; padding:2px 6px; border-radius:4px; background:#f5f3f0; color:#71695f; font-size:11px; }
+.worker-app .job-bottom { margin-top:14px; padding-top:13px; border-top:1px solid #f2ece6; align-items:center; }
+.worker-app .job-amount>small { display:block; margin-bottom:3px; font-size:11px; color:var(--muted); }
+.worker-app .job-price { display:block; font-size:25px; line-height:1.2; color:var(--worker-ink); }
+.worker-app .job-bottom .btn { min-width:94px; min-height:44px; border-radius:9px; padding:9px 15px; }
+.worker-app .order-list { padding:10px 12px 20px; }
+.worker-app .order-list-heading { margin-bottom:7px; }
+.worker-app .order-list-heading a { min-height:44px; color:var(--worker-ink); }
+.worker-app[data-page="orders"] .tabs { padding-inline:3px; border-bottom:1px solid var(--worker-border); }
+.worker-app[data-page="orders"] .tab { padding-inline:11px; font-size:14px; }
+.worker-app .status-hero { padding:15px; border:1px solid #f5d9c5; border-radius:13px; background:var(--worker-soft); margin-bottom:16px; }
+.worker-app .status-hero h1 { font-size:23px; color:var(--worker-ink); }
+.worker-app .status-hero p { color:#7d6251; font-size:12px; line-height:1.8; }
+.worker-app .order-contact .icon-btn { color:var(--worker-ink); }
+
+/* Wallet: balance and withdrawal remain distinct from order amounts. */
+.worker-app[data-page="wallet"] .page-toolbar { margin:-16px -14px 0; padding:4px 18px 10px; background:var(--worker-orange); color:var(--worker-on-orange); }
+.worker-app[data-page="wallet"] .page-toolbar .text-link { color:var(--worker-on-orange); }
+.worker-app .wallet-hero { margin:0 -14px 20px; padding:7px 20px 24px; border-radius:0 0 20px 20px; background:linear-gradient(180deg,var(--worker-orange),#ff7c39); }
+.worker-app .wallet-hero h2 { color:var(--worker-on-orange); font-size:13px; font-weight:500; }
+.worker-app .wallet-hero .amount { color:#fff; font-size:43px; font-weight:700; margin:10px 0 22px; }
+.worker-app .wallet-bottom { display:grid; grid-template-columns:1fr 1.2fr auto; border-color:#6b2c0026; padding-top:16px; gap:10px; }
+.worker-app .wallet-bottom small { color:var(--worker-on-orange); font-size:11px; }
+.worker-app .wallet-bottom strong { color:var(--worker-on-orange); font-size:18px; font-weight:600; }
+.worker-app .wallet-hero .btn { background:#fff; color:var(--worker-ink); border-color:#fff; min-height:44px; padding:9px 19px; border-radius:23px; }
+.worker-app .wallet-hero .btn:hover { background:#fff4e9; }
+.worker-app .metric-card { border:1px solid var(--worker-border); border-radius:13px; padding:17px 15px; }
+.worker-app .metric-card strong { color:var(--worker-ink); }
+.worker-app .transaction-row { padding-block:16px; border-color:#f0eae4; }
+.worker-app .transaction-row strong { color:var(--text); }
+.worker-app .transaction-amount { font-size:20px; }
+.worker-app .withdraw-input { border-color:#e5d2c2; }
+.worker-app .withdraw-input>span { color:var(--worker-ink); }
+.worker-app .credit-circle { border-color:#ffdfc6; border-top-color:#f27a31; border-right-color:#f27a31; border-bottom-color:#f27a31; }
+.worker-app .credit-circle strong { color:var(--worker-ink); }
+
+/* Profile uses the same orange identity area and white function cards. */
+.worker-app.is-profile .mobile-main>.profile-hero { background:var(--worker-orange); padding:18px 16px 34px; }
+.worker-app.is-profile .profile-hero h2 { color:#fff; font-size:22px; font-weight:700; }
+.worker-app.is-profile .profile-hero p { color:var(--worker-on-orange); font-size:12px; line-height:1.8; }
+.worker-app.is-profile .profile-hero .avatar { background:#fff3e8; color:var(--worker-ink); }
+.worker-app.is-profile .profile-hero>.icon-btn { color:#fff; }
+.worker-app.is-profile .profile-hero>.icon-btn:hover { background:#e64700; }
+.worker-app .profile-panel { position:relative; border:1px solid var(--worker-border); border-radius:14px; padding:17px 15px 8px; }
+.worker-app.is-profile .profile-hero+.profile-panel { margin-top:-14px; }
+.worker-app .profile-stats { padding:2px 0 8px; gap:0; }
+.worker-app .profile-stats a { min-height:62px; border-right:1px solid #f0eae4; }
+.worker-app .profile-stats a:last-child { border:0; }
+.worker-app .profile-stats strong { font-size:26px; color:var(--worker-ink); }
+.worker-app .profile-stats small { display:block; font-size:12px; margin-top:4px; }
+.worker-app .profile-panel h2 { position:relative; padding-left:10px; font-size:17px; margin-bottom:8px; }
+.worker-app .profile-panel h2:before { content:''; position:absolute; top:4px; left:0; width:3px; height:16px; border-radius:2px; background:var(--worker-orange); }
+.worker-app .profile-panel .row-icon { width:32px; height:32px; background:var(--worker-soft); border-radius:9px; }
+.worker-app .profile-panel .row-icon .icon { width:19px; height:19px; }
+.worker-app .profile-panel .list-row { min-height:60px; font-size:14px; }
+.worker-app .profile-panel .row-value { font-size:12px; }
+.worker-app .chat-bubble-row.mine .chat-bubble { background:var(--worker-soft); color:#764727; }
+.worker-app .sample-link,.worker-app .empty-link { color:var(--worker-ink); }
+.worker-app .upload-box,.worker-app .signature { border-color:#d8c2b0; background:#fffbf7; }
+body[data-app="worker"] .app-dialog .chip { min-height:44px; }
+body[data-app="worker"] .app-dialog .chip.active { color:var(--worker-ink); border-color:#efc09d; background:var(--worker-soft); }
+body[data-app="worker"] .app-dialog .notice { background:var(--worker-soft); color:#7a4d30; }
+body[data-app="worker"] .app-dialog .progress>span { background:var(--worker-orange); }
+@media (max-width:360px) {
+  .worker-app .work-overview { padding-inline:12px; }
+  .worker-app .work-metrics strong { font-size:23px; }
+  .worker-app .work-metrics span { font-size:11px; }
+  .worker-app .work-quick-links a { font-size:11px; }
+  .worker-app .job-card { padding-inline:12px; }
+  .worker-app .job-card h3 { font-size:16px; }
+  .worker-app .job-card p { font-size:11px; }
+  .worker-app .job-card .match { font-size:11px; }
+  .worker-app .job-price { font-size:23px; }
+  .worker-app .job-bottom .btn { min-width:88px; padding-inline:12px; }
+  .worker-app .wallet-hero { padding-inline:17px; }
+  .worker-app .wallet-bottom { gap:7px; }
+  .worker-app .wallet-bottom strong { font-size:16px; }
+  .worker-app .wallet-hero .btn { padding-inline:15px; }
+  .worker-app.is-profile .profile-hero { gap:8px; padding-inline:14px; }
+  .worker-app .profile-identity { gap:10px; }
+  .worker-app.is-profile .profile-hero h2 { font-size:20px; }
+  .worker-app.is-profile .profile-hero p { font-size:11px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  body[data-app="worker"] *,body[data-app="worker"] *:before,body[data-app="worker"] *:after { transition:none!important; animation:none!important; }
+}
