@@ -114,21 +114,24 @@ body[data-app="worker"] {
 .worker-app .order-contact .icon-btn { color:var(--worker-ink); }
 
 /* Wallet: balance and withdrawal remain distinct from order amounts. */
-.worker-app[data-page="wallet"] .page-toolbar { margin:-16px -14px 0; padding:4px 18px 10px; background:var(--worker-orange); color:var(--worker-on-orange); }
-.worker-app[data-page="wallet"] .page-toolbar .text-link { color:var(--worker-on-orange); }
-.worker-app .wallet-hero { margin:0 -14px 20px; padding:7px 20px 24px; border-radius:0 0 20px 20px; background:linear-gradient(180deg,var(--worker-orange),#ff7c39); }
-.worker-app .wallet-hero h2 { color:var(--worker-on-orange); font-size:13px; font-weight:500; }
-.worker-app .wallet-hero .amount { color:#fff; font-size:43px; font-weight:700; margin:10px 0 22px; }
-.worker-app .wallet-bottom { display:grid; grid-template-columns:1fr 1.2fr auto; border-color:#6b2c0026; padding-top:16px; gap:10px; }
-.worker-app .wallet-bottom small { color:var(--worker-on-orange); font-size:11px; }
-.worker-app .wallet-bottom strong { color:var(--worker-on-orange); font-size:18px; font-weight:600; }
-.worker-app .wallet-hero .btn { background:#fff; color:var(--worker-ink); border-color:#fff; min-height:44px; padding:9px 19px; border-radius:23px; }
-.worker-app .wallet-hero .btn:hover { background:#fff4e9; }
+.worker-app .wallet-account-card { margin-bottom:20px; padding:0 18px 20px; border:1px solid var(--worker-border); border-radius:16px; background:#fff; }
+.worker-app[data-page="wallet"] .page-toolbar { min-height:52px; margin:0; padding:0; border-bottom:1px solid var(--line); background:#fff; color:var(--text); font-size:14px; font-weight:600; }
+.worker-app[data-page="wallet"] .page-toolbar .text-link { min-height:44px; color:var(--muted); font-size:12px; font-weight:400; }
+.worker-app .wallet-hero { margin:0; padding:22px 0 0; border-radius:0; background:#fff; }
+.worker-app .wallet-hero h2 { color:var(--muted); font-size:13px; font-weight:400; }
+.worker-app .wallet-hero .amount { color:var(--worker-ink); font-size:43px; font-weight:700; margin:10px 0 22px; }
+.worker-app .wallet-bottom { display:grid; grid-template-columns:1fr 1.2fr auto; border-color:var(--line); padding-top:16px; gap:10px; }
+.worker-app .wallet-bottom small { color:var(--muted); font-size:11px; }
+.worker-app .wallet-bottom strong { color:var(--text); font-size:18px; font-weight:600; }
+.worker-app .wallet-hero .btn { background:var(--brand); color:#fff; border-color:var(--brand); min-height:44px; padding:9px 19px; border-radius:23px; }
+.worker-app .wallet-hero .btn:hover { background:var(--brand-hover); border-color:var(--brand-hover); }
 .worker-app .metric-card { border:1px solid var(--worker-border); border-radius:13px; padding:17px 15px; }
 .worker-app .metric-card strong { color:var(--worker-ink); }
 .worker-app .transaction-row { padding-block:16px; border-color:#f0eae4; }
 .worker-app .transaction-row strong { color:var(--text); }
 .worker-app .transaction-amount { font-size:20px; }
+.worker-app[data-page="wallet"] .transaction-row>div { min-width:0; overflow-wrap:anywhere; }
+.worker-app[data-page="wallet"] .transaction-amount small { max-width:110px; white-space:normal; line-height:1.5; }
 .worker-app .withdraw-input { border-color:#e5d2c2; }
 .worker-app .withdraw-input>span { color:var(--worker-ink); }
 .worker-app .credit-circle { border-color:#ffdfc6; border-top-color:#f27a31; border-right-color:#f27a31; border-bottom-color:#f27a31; }
@@ -172,7 +175,7 @@ body[data-app="worker"] .app-dialog .progress>span { background:var(--worker-ora
   .worker-app .job-card .match { font-size:11px; }
   .worker-app .job-price { font-size:23px; }
   .worker-app .job-bottom .btn { min-width:88px; padding-inline:12px; }
-  .worker-app .wallet-hero { padding-inline:17px; }
+  .worker-app .wallet-account-card { padding-inline:15px; }
   .worker-app .wallet-bottom { gap:7px; }
   .worker-app .wallet-bottom strong { font-size:16px; }
   .worker-app .wallet-hero .btn { padding-inline:15px; }
