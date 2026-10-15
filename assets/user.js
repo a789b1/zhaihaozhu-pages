@@ -23,7 +23,8 @@ const serviceTile=s=>`<a class="catalog-tile" href="#/service?service=${s.id}">$
 const catalogPhoto=item=>`<div class="catalog-photo-frame"><div class="service-art service-photo photo-${e(item.photo)}" role="img" aria-label="${e(item.name)}"></div></div>`;
 const catalogPrice=item=>item.serviceId?(ZHZ_SERVICES.find(s=>s.id===item.serviceId)?.price??item.price):item.price;
 const catalogPriceLabel=item=>{const price=catalogPrice(item);return price===null?'':`<span class="tile-price">¥${Number(price).toLocaleString('zh-CN')}<small>${item.unit?'/'+e(item.unit):''}${item.fixed||ZHZ_SERVICES.find(s=>s.id===item.serviceId)?.fixed?'':'起'}</small></span>`;};
-const catalogTile=item=>`<a class="catalog-tile source-service-tile" data-catalog-id="${item.id}" href="#/service?catalog=${item.id}" title="${e(item.name)}">${catalogPhoto(item)}<h3>${e(item.name)}</h3></a>`;
+const catalogCardNames={"卧室及书房改造":"卧室书房","墙纸墙布更新":"墙纸墙布","地面铺装与更换":"地面换新","美缝":"美缝施工","通行便利及基础无障碍改造":"无障碍改造","开关插座及灯具维修":"灯具插座","电热水器维修":"热水器维修","管根及接缝处理":"管根接缝","瓷砖空鼓及破损维修":"瓷砖维修","门窗开合维修":"门窗调校","普通门锁维修":"门锁维修","门窗五金维修":"门窗五金","电热水器清洁":"热水器清洁","现有柜体及储物空间优化":"收纳优化","成品组合家具安装":"组合家具","电热水器安装":"热水器安装","开关插座安装":"开关插座","普通门锁及配套五金安装":"门锁五金","普通晾衣架安装":"晾衣架安装"};
+const catalogTile=item=>`<a class="catalog-tile source-service-tile" data-catalog-id="${item.id}" href="#/service?catalog=${item.id}" title="${e(item.name)}">${catalogPhoto(item)}<h3>${e(catalogCardNames[item.name]||item.name)}</h3></a>`;
 const visibleCatalog=()=>ZHZ_SERVICE_CATALOG.filter(item=>!item.serviceId||!App.state.serviceDisabled?.includes(item.serviceId));
 const catalogDetail=item=>{
  if(!item)return mobilePage('服务详情',empty('未找到这项服务','请返回分类重新选择。','categories','返回全部服务'));
