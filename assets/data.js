@@ -21,7 +21,7 @@ window.ZHZ_WORKERS = [
  {id:'w5',name:'张师傅',full:'张强',title:'综合维修师傅',skills:['水电系统','柜体收纳'],rating:4.7,orders:456,years:5,distance:4.2,credit:86,online:true,city:'广州',area:'天河区',match:72,response:'6分钟',color:'blue'}
 ];
 window.ZHZ_STATUS = {
- pending:['待支付','orange',0],dispatching:['待派单','blue',1],offered:['待接单','blue',1],accepted:['待上门','blue',2],enroute:['师傅前往中','blue',2],arrived:['已到场','blue',2],quote:['待报价确认','orange',3],working:['服务中','blue',3],addon:['待增项确认','orange',3],acceptance:['待验收','orange',4],completed:['已完成','green',5],cancelled:['已取消','gray',-1],refund:['退款处理中','orange',-1],refunded:['已退款','gray',-1],aftersale:['售后处理中','orange',5]
+ ready:['待开工','orange',3],terminated:['已终止','gray',-1],pending:['待支付','orange',0],dispatching:['待派单','blue',1],offered:['待接单','blue',1],accepted:['待上门','blue',2],enroute:['师傅前往中','blue',2],arrived:['已到场','blue',2],quote:['待报价确认','orange',3],working:['服务中','blue',3],addon:['待增项确认','orange',3],acceptance:['待验收','orange',4],completed:['已完成','green',5],cancelled:['已取消','gray',-1],refund:['退款处理中','orange',-1],refunded:['已退款','gray',-1],aftersale:['售后处理中','orange',5]
 };
 window.ZHZ_SEED = () => ({
  version:3, user:{name:'林女士',phone:'138****5678',loggedIn:true},workerOnline:true,workerVerified:true,
