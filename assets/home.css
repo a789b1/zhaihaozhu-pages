@@ -14,7 +14,7 @@
 .user-app.is-home .home-message:hover { background:#ffffff20; }
 .user-app.is-home .home-message i { width:8px; height:8px; border:2px solid var(--home-orange); background:white; top:7px; right:9px; }
 .user-app.is-home .mini-capsule { background:#ffffffe0; border-color:#ffffff80; }
-.user-app.is-home .home-search { padding:9px 16px 31px; background:linear-gradient(180deg,var(--home-orange),#ff7633); }
+.user-app.is-home .home-search { padding:9px 16px 20px; background:var(--home-orange); }
 .user-app.is-home .service-search { min-height:48px; gap:8px; background:#fff; padding:0 3px 0 13px; border:1px solid #ffffffb3; box-shadow:0 3px 8px #b5390010; }
 .user-app.is-home .search-city { min-height:46px; color:var(--home-ink); font-size:14px; padding-right:9px; }
 .user-app.is-home .search-city:after { background:#e9e5e1; }
@@ -96,13 +96,6 @@ body[data-app="user"]:has(.user-app.is-home) .app-dialog .notice { color:#805238
 
 /* Confirmed first-phase navigation and grouped catalog. */
 body[data-app="user"] .phase1-main-grid {grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 4px;}
-.phase1-banner {display:flex;align-items:center;gap:10px;overflow:hidden;background:#fff0e5;border:1px solid #ffdfc8;border-radius:14px;margin-bottom:14px;padding:18px 14px;color:#552b19;}
-.phase1-banner>div:first-child {flex:1;min-width:0;}
-.phase1-banner-label {font-size:11px;color:#b63b00;font-weight:600;}
-.phase1-banner h2 {font-size:18px;line-height:1.5;margin:6px 0;}
-.phase1-banner p,.phase1-banner strong {font-size:11px;line-height:1.8;}
-.phase1-banner strong {display:flex;align-items:center;gap:4px;margin-top:10px;color:#b63b00;}
-.phase1-banner .service-art {width:90px;height:116px;flex:none;border-radius:44px 44px 8px 8px;}
 .phase1-group-note {font-size:12px;color:#6b6b75;margin:0 0 14px;}
 .phase1-catalog-group {margin:0 0 28px;}
 .phase1-catalog-group>h3 {font-size:14px;margin:0 0 14px;}
@@ -113,3 +106,15 @@ body[data-app="user"] .repair-entry>a:first-child {width:100%;}
 body[data-app="user"] .category-sidebar button.active:before {background:#ff5000;}
 body[data-app="user"] .catalog-subnav a.active {color:#b63b00;border-color:#ff5000;}
 body[data-app="user"] .home-group-heading>a {margin-left:auto;}
+
+/* Homepage banner sits between search and the four category shortcuts. */
+.user-app.is-home .home-banner-wrap {padding:0 16px 31px;background:#ff5000;}
+.home-banner {display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:156px;padding:20px 18px;border-radius:14px;background:#fff1e7;color:#6d2b0a;overflow:hidden;}
+.home-banner-copy {position:relative;z-index:1;min-width:0;}
+.home-banner-copy>span {font-size:11px;letter-spacing:1px;color:#a83900;}
+.home-banner h2 {font-size:22px;line-height:1.4;font-weight:700;letter-spacing:-.5px;margin:7px 0;color:#9c3300;}
+.home-banner p {font-size:11px;line-height:1.7;margin:0;color:#7d4930;}
+.home-banner strong {display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;margin-top:14px;color:#aa3800;}
+.home-banner-mark {flex:none;color:#ff5000;opacity:.7;transform:rotate(-8deg);margin-right:-20px;}
+.home-banner:focus-visible {outline:3px solid #6d2b0a;outline-offset:3px;}
+@media(max-width:360px){.user-app.is-home .home-banner-wrap{padding-inline:12px}.home-banner{padding:18px 14px;min-height:148px}.home-banner h2{font-size:20px}.home-banner-mark{margin-right:-36px;opacity:.3}}
