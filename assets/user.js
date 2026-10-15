@@ -40,6 +40,18 @@ const homeGroup=category=>{
  for(const item of items){if(picks.length>=3)break;if(!picks.includes(item))picks.push(item);}
  return `<section class="home-service-group">${homePanelHeading(category.name,homeGroupBenefits[category.name],'#/categories?category='+encodeURIComponent(category.name))}<div class="catalog-grid">${picks.map(homeFeatureTile).join('')}</div></section>`;
 };
+const homeOfferBanner=()=>App.temp.homePromoDismissed?'':`<aside class="home-promo" aria-label="新客首单优惠"><a class="home-promo-copy" href="#/coupons" aria-label="新客首单减20元，满100元可用，查看用券规则"><h2>新客首单减 <span class="home-promo-amount">20<small>元</small></span></h2><span class="home-promo-condition">满100元可用 · 查看规则</span></a><a class="home-promo-cta" href="#/categories">立即体验${icon('arrow',12)}</a><button class="home-promo-close" type="button" data-action="dismiss-home-promo" aria-label="关闭首单优惠">${icon('close',16)}</button></aside>`;
+let homePromoObserver=null;
+const syncHomeOfferLayout=()=>{
+ homePromoObserver?.disconnect();homePromoObserver=null;
+ const home=document.querySelector('.user-app.is-home'),promo=home?.querySelector('.home-promo'),nav=home?.querySelector('.bottom-nav');
+ if(!home||!promo||!nav){home?.classList.remove('has-home-promo');return;}
+ home.classList.add('has-home-promo');
+ const update=()=>{home.style.setProperty('--home-nav-height',nav.getBoundingClientRect().height+'px');home.style.setProperty('--home-promo-height',promo.getBoundingClientRect().height+'px');};
+ update();
+ if(window.ResizeObserver){homePromoObserver=new ResizeObserver(update);homePromoObserver.observe(nav);homePromoObserver.observe(promo);}
+};
+A['dismiss-home-promo']=()=>{App.temp.homePromoDismissed=true;document.querySelector('.home-promo')?.remove();syncHomeOfferLayout();document.querySelector('.bottom-nav a.active')?.focus({preventScroll:true});};
 V.home=()=>mobilePage('首页',`
  <svg class="home-ribbon-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><clipPath id="home-heading-ribbon" clipPathUnits="objectBoundingBox"><path d="M0,0 H1 C.84,0 .84,.22 .80,.49 C.76,.78 .67,.82 .54,.82 H.10 C.05,.82 .01,.89 0,1 Z"/></clipPath></defs></svg>
  <div class="home-search">${homeSearch()}</div>
@@ -49,7 +61,7 @@ V.home=()=>mobilePage('首页',`
  <div class="repair-entry"><a href="#/repair"><span class="repair-entry-icon">${icon('camera',26)}</span><span class="repair-entry-copy"><strong>拍照报修<span class="repair-entry-ai">·AI 故障识别</span></strong><small>拍张照片，辅助判断故障</small></span>${icon('arrow',15)}</a></div>
  ${ZHZ_USER_CATEGORY_TREE.map(homeGroup).join('')}
  <section class="home-service-group home-workers-panel">${homePanelHeading('附近师傅','实名认证｜服务评价｜就近服务','#/workers')}<div class="home-worker-list">${ZHZ_WORKERS.filter(w=>w.city===App.state.city).slice(0,2).map(w=>workerCard(w)).join('')}</div></section>
- <section class="home-promo" aria-label="新客首单优惠"><div class="home-promo-copy"><span class="home-promo-label">新客专享 · 首单礼</span><h2>首单立减 <span class="home-promo-amount">20<small>元</small></span></h2><p>让家的小问题，轻松解决</p><small class="home-promo-condition">新客券满100元可用</small></div><div class="home-promo-action"><a class="home-promo-cta" href="#/categories">立即体验${icon('arrow',14)}</a><a class="home-promo-rules" href="#/coupons">查看用券规则${icon('arrow',11)}</a></div></section></div>`,'','home',{edge:true});
+ ${homeOfferBanner()}</div>`,'','home',{edge:true});
 V.login=loginView;
 V.search=()=>{
  const q=App.query.get('q')||'',mode=App.query.get('tab')||'service';
@@ -231,6 +243,7 @@ V.categories=()=>{
  return mobilePage('全部服务',`<div class="category-search">${mobileSearch()}</div><div class="category-layout"><nav class="category-sidebar" aria-label="服务分类">${tree.map(c=>`<button class="${category.id===c.id?'active':''}" ${category.id===c.id?'aria-current="true"':''} data-action="category-select" data-category="${e(c.name)}">${e(c.name)}</button>`).join('')}</nav><div class="category-content"><h2>${e(category.name)}</h2><nav class="catalog-subnav" aria-label="二级分类">${['all',...category.groups].map(group=>`<a class="${group===sub?'active':''}" ${group===sub?'aria-current="true"':''} href="#/categories?category=${encodeURIComponent(category.name)}&sub=${encodeURIComponent(group)}">${e(group==='all'?'全部':group)}</a>`).join('')}</nav>${category.groups.filter(g=>sub==='all'||g===sub).map(group=>`<section class="phase1-catalog-group"><h3>${e(group)}</h3><div class="catalog-grid source-service-grid">${items.filter(item=>item.group===group).map(catalogTile).join('')}</div></section>`).join('')}</div></div><a class="category-support" href="#/chat?support=1"><span>没找到需要的服务？</span><strong>联系客服${icon('arrow',13)}</strong></a>`,'','categories',{edge:true});
 };
 App.afterRender=()=>{
+ syncHomeOfferLayout();
  if(App.route==='service'){const rail=document.querySelector('.sd-option-rail'),selected=rail?.querySelector('.is-selected');if(rail&&selected)rail.scrollLeft=Math.max(0,selected.offsetLeft-rail.offsetLeft-16);}
 
  if(App.route==='categories'){const rail=document.querySelector('.category-sidebar'),selected=rail?.querySelector('button.active');if(rail&&selected){const top=selected.offsetTop-rail.offsetTop;rail.scrollTop=top+selected.offsetHeight>rail.clientHeight?Math.max(0,top-rail.clientHeight/2):0;}}

@@ -110,28 +110,22 @@ body[data-app="user"] .catalog-subnav a.active {color:#b63b00;border-color:#ff50
  .user-app.is-home .home-feature-card h3{font-size:13px;top:10px;}
 }
 
-/* A coupon-shaped first-order offer at the end of the homepage. */
-.user-app.is-home .home-promo {position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr)105px;align-items:center;gap:12px;overflow:hidden;margin:0 0 14px;padding:18px 15px;border:1px solid #ffc594;border-radius:15px;background:linear-gradient(110deg,#fff0de 0%,#ffe0be 100%);}
-.home-promo-copy {min-width:0;}
-.home-promo-label {display:inline-block;font-size:11px;line-height:1.5;font-weight:600;letter-spacing:.5px;color:#a63900;}
-.user-app.is-home .home-promo h2 {display:flex;align-items:baseline;gap:6px;margin:6px 0 4px;font-size:20px;line-height:1.25;font-weight:700;color:#80320b;white-space:nowrap;}
-.home-promo-amount {display:inline-flex;align-items:baseline;gap:2px;font-family:var(--numbers);font-size:43px;line-height:1;font-weight:750;letter-spacing:-2px;color:#c83e00;}
-.home-promo-amount small {color:inherit;font-size:16px;font-weight:650;letter-spacing:0;}
-.home-promo-copy p {font-size:12px;line-height:1.7;color:#7d4a29;}
-.home-promo-condition {display:block;margin-top:4px;font-size:10px;line-height:1.5;color:#855d40;}
-.home-promo-action {align-self:stretch;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:1px dashed #e8ac7b;padding-left:12px;}
-.home-promo:before,.home-promo:after {content:'';position:absolute;right:112px;width:14px;height:14px;border:1px solid #ffc594;border-radius:50%;background:#f5f5f7;}
-.home-promo:before {top:-8px;}
-.home-promo:after {bottom:-8px;}
-.home-promo-cta {display:flex;align-items:center;justify-content:center;gap:3px;width:100%;min-height:44px;padding:8px;border:1px solid #c43c00;border-radius:22px;background:#ce4000;color:#fff;font-size:13px;font-weight:600;box-shadow:0 4px 9px #b441001c;}
+/* Compact dismissible offer, fixed above the measured bottom navigation. */
+.user-app.is-home.has-home-promo .mobile-main.edge {padding-bottom:calc(var(--home-nav-height,70px) + var(--home-promo-height,68px) + 28px);}
+.user-app.is-home .home-promo {position:fixed;z-index:23;left:50%;bottom:calc(var(--home-nav-height,70px) + 8px);transform:translateX(-50%);display:grid;grid-template-columns:minmax(0,1fr)90px;align-items:center;gap:10px;width:calc(100% - 24px);max-width:406px;min-height:68px;padding:9px 48px 9px 14px;border:1px solid #ffc594;border-radius:13px;background:linear-gradient(110deg,#fff0de 0%,#ffe0be 100%);box-shadow:0 5px 18px #6b2c001a;}
+.home-promo-copy {display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;min-height:44px;}
+.user-app.is-home .home-promo h2 {display:flex;align-items:baseline;gap:4px;margin:0;font-size:17px;line-height:1.25;font-weight:650;color:#80320b;white-space:nowrap;}
+.home-promo-amount {display:inline-flex;align-items:baseline;gap:1px;font-family:var(--numbers);font-size:27px;line-height:1;font-weight:750;letter-spacing:-.8px;color:#c83e00;}
+.home-promo-amount small {color:inherit;font-size:14px;font-weight:600;letter-spacing:0;}
+.home-promo-condition {display:block;font-size:10px;line-height:1.5;color:#805338;}
+.home-promo-cta {display:flex;align-items:center;justify-content:center;gap:3px;min-height:44px;padding:8px 6px;border:1px solid #c43c00;border-radius:22px;background:#ce4000;color:#fff;font-size:13px;font-weight:600;white-space:nowrap;}
 .home-promo-cta:hover {background:#b83800;}
-.home-promo-rules {display:flex;align-items:center;justify-content:center;gap:2px;min-height:44px;font-size:10px;color:#794725;}
+.home-promo-close {position:absolute;top:0;right:0;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;border-radius:12px;background:transparent;color:#8e512d;}
+.home-promo-close:hover {background:#ffffff66;}
 @media(max-width:360px){
- .user-app.is-home .home-promo{grid-template-columns:minmax(0,1fr)92px;gap:9px;padding:16px 12px;}
- .user-app.is-home .home-promo h2{font-size:18px;gap:4px;}
- .home-promo-amount{font-size:38px;}
- .home-promo-copy p{font-size:11px;}
- .home-promo-action{padding-left:9px;}
- .home-promo:before,.home-promo:after{right:97px;}
- .home-promo-cta{font-size:12px;gap:2px;padding-inline:6px;}
+ .user-app.is-home .home-promo{width:calc(100% - 20px);grid-template-columns:minmax(0,1fr)82px;gap:6px;padding-left:11px;}
+ .user-app.is-home .home-promo h2{font-size:15px;gap:3px;}
+ .home-promo-amount{font-size:25px;}
+ .home-promo-amount small{font-size:13px;}
+ .home-promo-cta{font-size:12px;gap:2px;}
 }
