@@ -21,7 +21,7 @@
 .user-app.is-home .home-search-placeholder { gap:6px; color:var(--home-muted); font-size:13px; }
 .user-app.is-home .home-search-placeholder span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .user-app.is-home .service-search>.home-search-submit { flex:0 0 auto; min-width:56px; min-height:44px; justify-content:center; padding:6px 10px; border:3px solid white; border-radius:25px; background:var(--brand-hover); color:#fff; font-size:13px; font-weight:550; }
-.user-app.is-home .home-categories { position:relative; margin-top:-15px; border:0; border-radius:23px 23px 0 0; padding:22px 15px 0; background:#fff; }
+.user-app.is-home .home-categories { position:relative; margin:14px 12px 0; border:1px solid var(--home-border); border-radius:15px; padding:22px 15px 0; overflow:hidden; background:#fff; }
 .user-app.is-home .category-grid { gap:20px 5px; }
 .user-app.is-home .category-item { font-size:12px; color:#3b3836; gap:8px; }
 .user-app.is-home .category-icon { color:var(--home-orange-ink); background:var(--home-orange-soft); border-radius:13px; width:42px; height:42px; }
@@ -71,7 +71,7 @@ body[data-app="user"]:has(.user-app.is-home) .app-dialog .notice { color:#805238
   .user-app.is-home .home-nav { padding-inline:12px; }
   .user-app.is-home .home-wordmark { font-size:24px; }
   .user-app.is-home .home-search { padding-inline:12px; }
-  .user-app.is-home .home-categories { padding-inline:11px; }
+  .user-app.is-home .home-categories { margin-inline:10px; padding-inline:11px; }
   .user-app.is-home .category-grid { gap:19px 3px; }
   .user-app.is-home .category-item { font-size:11px; }
   .user-app.is-home .trust-strip { font-size:10px; gap:3px; }
@@ -108,7 +108,7 @@ body[data-app="user"] .catalog-subnav a.active {color:#b63b00;border-color:#ff50
 body[data-app="user"] .home-group-heading>a {margin-left:auto;}
 
 /* Homepage banner sits between search and the four category shortcuts. */
-.user-app.is-home .home-banner-wrap {padding:0 16px 31px;background:#ff5000;}
+.user-app.is-home .home-banner-wrap {padding:0 16px 16px;background:#ff5000;}
 .home-banner {display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:156px;padding:20px 18px;border-radius:14px;background:#fff1e7;color:#6d2b0a;overflow:hidden;}
 .home-banner-copy {position:relative;z-index:1;min-width:0;}
 .home-banner-copy>span {font-size:11px;letter-spacing:1px;color:#a83900;}
