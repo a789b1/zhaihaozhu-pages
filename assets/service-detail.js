@@ -64,29 +64,31 @@
   window.renderServiceDetail = ({ catalog = null, service = null }) => {
     const name = catalog?.name || service.name;
     const kind = catalog?.photo || service.id;
-    const index = Math.min(selection(catalog, service), Math.max(0, (service?.specs.length || 1) - 1));
-    const basePrice = service?.price ?? catalog?.price;
-    const price = service?.specs[index]?.[1] ?? basePrice;
-    const fixed = !!(catalog?.fixed || service?.fixed);
+    const options = catalog ? (catalog.variants || []) : (service?.specs || []).map(([label, price])=>({label,price,unit:service.unit||'',warranty:service.warranty,fixed:service.fixed,serviceId:service.id}));
+    const index = Math.min(selection(catalog, service), Math.max(0,options.length-1));
+    const selected = options[index] || null;
+    if(catalog)service=ZHZ_SERVICES.find(s=>s.id===selected?.serviceId);
+    const price = selected?.price ?? null;
+    const fixed = !!selected?.fixed;
     const bookable = !!service && !App.state.serviceDisabled?.includes(service.id);
-    const unit = catalog?.unit || service?.unit || '';
-    const warranty = catalog ? catalog.warranty : service.warranty;
-    const duration = catalog?.duration ? catalog.duration + '分钟' : service?.duration || '';
-    const description = service?.desc || catalog?.description || catalog?.project;
+    const unit = selected?.unit || '';
+    const warranty = selected?.warranty ?? null;
+    const duration = service?.duration || '';
+    const description = catalog?.description || service?.desc || '';
     const address = App.state.addresses.find(a => a.id === App.state.addressId);
     const area = address?.district || App.state.city + '市';
     const favorite = service && App.state.favorites.includes(service.id);
-    const contextAttrs = `data-service="${e(service?.id || '')}" data-catalog="${e(catalog?.id || '')}" data-index="${index}"`;
-    const consult = `#/chat?support=1${catalog ? '&catalog=' + catalog.id : ''}`;
-    const priceMarkup = price === null ? '<strong class="sd-assessment">上门评估</strong>' : `<span class="sd-price"><i>¥</i><strong>${amount(price)}</strong><small>${unit ? '/' + e(unit) : ''}${fixed ? '' : '起'}</small></span>`;
-    const quoteTitle = fixed ? '什么是一口价' : price === null ? '按需制定服务方案' : '服务报价说明';
-    const quoteText = fixed ? '所选标准服务按明确价格计费。师傅上门核对范围后服务，超出范围的项目须另行确认。' : price === null ? '根据实际空间、设备与服务需求评估方案。服务范围、用料和费用均在施工前与您确认。' : '页面展示标准项目的参考起步价。师傅上门检测后列明方案与费用，您确认后再施工。';
+    const contextAttrs = `data-service="${e(service?.id || '')}" data-catalog="${e(catalog?.id || '')}" data-index="${catalog?0:index}"`;
+    const consult = `#/chat?support=1${catalog ? '&catalog=' + catalog.id + '&variant=' + index : ''}`;
+    const priceMarkup = price === null ? '<strong class="sd-unpriced">价格待配置</strong>' : `<span class="sd-price"><i>¥</i><strong>${amount(price)}</strong><small>${unit ? '/' + e(unit) : ''}${fixed ? '' : '起'}</small></span>`;
+    const quoteTitle = fixed ? '什么是一口价' : '服务报价说明';
+    const quoteText = fixed ? '所选标准服务按明确价格计费。师傅上门核对范围后服务，超出范围的项目须另行确认。' : price === null ? '该项目报价尚未配置，可联系客服确认服务内容与费用。' : '页面展示标准项目的参考起步价。师傅上门检测后列明方案与费用，您确认后再施工。';
     const details = [
-      ['计价方式', catalog?.billing || (fixed ? '标准范围一口价' : price === null ? '按实际范围评估' : '检测后确认报价')],
+      ['计价方式', fixed ? '标准范围一口价' : price === null ? '报价待配置' : '按所选服务项目及单位计价'],
       ['质保期限', warranty === null ? '' : warranty ? warranty + '天 · 以订单质保范围为准' : '此项不单设质保'],
       ['参考用时', duration], ['响应参考', catalog?.response ? catalog.response + ' · 以平台确认为准' : '']
     ];
-    const scopes = [catalog?.scope && `服务范围：${catalog.scope}`, catalog?.rules, catalog?.note].filter(Boolean);
+    const scopes = [catalog?.scope && `服务范围：${catalog.scope}`, selected?.description && `所选项目：${selected.description}`,selected?.note && `费用说明：${selected.note}`].filter(Boolean);
     // Retain the source description as well as the fuller native product description.
     if (catalog?.description && catalog.description !== description) scopes.unshift(`项目说明：${catalog.description}`);
     const scenes = sceneGroups[kind] || [kind, 'faucet', 'cabinet', 'socket', 'painting'];
@@ -96,12 +98,11 @@
       <button class="sd-cover" type="button" data-action="detail-photo" data-photo="${e(kind)}" data-title="${e(name)}" aria-label="预览${e(name)}服务图片">${photo(kind, name)}<span class="sd-image-note">服务场景示意 ${icon('image', 12)}</span></button>
       <section class="sd-product" aria-label="服务价格">
         <div class="sd-product-title"><h1>${e(name)}</h1>${service ? `<button class="icon-btn sd-favorite ${favorite ? 'is-saved' : ''}" data-action="detail-favorite" data-id="${service.id}" aria-label="${favorite ? '取消收藏' : '收藏服务'}" aria-pressed="${favorite}">${icon('heart', 21)}</button>` : ''}</div>
-        <div class="sd-price-row">${priceMarkup}<span class="sd-price-kind">${fixed ? '标准一口价' : '服务前确认费用'}</span></div>
-        <p class="sd-price-caption">${fixed ? '按所选项目及标准范围计价' : '具体服务范围及费用，施工前确认'}</p>
+        <p class="sd-price-caption">${price===null?'该项目价格待配置，请联系客服确认':fixed?'标准服务范围，按所选规格计价':'按所选服务项目及单位计价，超出范围先确认费用'}</p>
       </section>
+      ${options.length?`<section class="sd-option-section" aria-label="服务规格与价格"><div class="sd-option-rail" role="group" aria-label="选择服务规格">${options.map((option,i)=>`<button class="sd-option ${i===index?'is-selected':''}" type="button" data-action="detail-spec" data-key="${e(catalog?.id||service.id)}" data-index="${i}" aria-pressed="${i===index}"><strong>${e(option.label)}</strong><span class="sd-option-price">¥${amount(option.price)}<small>/${e(option.unit)}</small></span>${i===index?`<span class="sd-option-check" aria-hidden="true">${icon('check',12)}</span>`:''}</button>`).join('')}</div></section>`:`<div class="sd-unpriced-note">价格待配置 · 请联系客服确认</div>`}
       <button class="sd-assurance" type="button" data-action="detail-assurance"><strong>服务保障</strong><span>流程规范 · 费用确认 · 售后保障</span>${icon('arrow', 14)}</button>
       <button class="sd-location" type="button" data-action="detail-area"><span>${icon('pin', 15)}${e(area)}</span><span>预约时间下单选择 ${icon('arrow', 13)}</span></button>
-      ${service && service.specs.length > 1 ? `<section class="sd-specs"><h2>选择服务规格</h2><div class="chips">${service.specs.map(([label, value], i) => `<button class="chip ${i === index ? 'active' : ''}" data-action="detail-spec" data-key="${e(catalog?.id || service.id)}" data-index="${i}" aria-pressed="${i === index}">${e(label)} · ¥${amount(value)}</button>`).join('')}</div></section>` : ''}
       <section class="sd-details"><h2 class="sd-section-label">服务详情</h2>
         <article class="sd-overview">
           ${heading(quoteTitle)}<p class="sd-intro">${quoteText}</p>
@@ -117,7 +118,7 @@
       ${worker && bookable ? `<section class="sd-related"><div class="between"><h2>服务师傅</h2><a class="text-link" href="#/workers?category=${encodeURIComponent(service.category)}">查看更多 ${icon('arrow', 13)}</a></div>${workerCard(worker)}<button class="btn soft full" data-action="detail-reserve" ${contextAttrs} data-worker="${worker.id}">优先预约${e(worker.name)}</button><p class="sd-related-note">指定师傅作为偏好，最终以档期及平台派单为准。</p></section>` : ''}
       ${service ? `<section class="sd-related sd-reviews"><div class="between"><h2>用户评价</h2><span class="sd-demo-note">演示评价</span></div><div class="sd-review-score"><strong>${service.rating}</strong><span class="score">${icon('star', 14)} 服务评分</span><span>${service.sold}次服务</span></div><div class="mini-review"><div class="review-meta"><strong>林**</strong><span class="score" aria-label="五星评价">★★★★★</span></div><p>提前沟通了时间，价格明细清楚，完成后也把现场收拾好了。</p></div></section>` : ''}
     </div>`;
-    const footer = `<a class="sd-contact" href="${consult}" aria-label="咨询客服">${icon('headphones', 22)}<span>客服</span></a><div class="sd-footer-price">${priceMarkup}<small>${fixed ? '所选标准服务' : '参考价格'}</small></div>${bookable ? `<button class="btn sd-reserve" data-action="detail-reserve" ${contextAttrs}>立即预约</button>` : `<a class="btn sd-reserve" href="${consult}">咨询服务方案</a>`}`;
+    const footer = `<a class="sd-contact" href="${consult}" aria-label="咨询客服">${icon('headphones', 22)}<span>客服</span></a><div class="sd-footer-price">${priceMarkup}<small>${fixed ? '所选标准服务' : '所选服务价格'}</small></div>${bookable ? `<button class="btn sd-reserve" data-action="detail-reserve" ${contextAttrs}>立即预约</button>` : `<a class="btn sd-reserve" href="${consult}">${price===null?'咨询价格':'预约咨询'}</a>`}`;
     return mobilePage(e(name), body, footer, '', { edge: true });
   };
 
@@ -150,7 +151,8 @@
   };
   App.actions['detail-assurance'] = () => {
     const { catalog, service } = current();
-    const warranty = catalog ? catalog.warranty : service.warranty;
+    const option=catalog?.variants?.[selection(catalog,service)];
+    const warranty = option?.warranty ?? (catalog ? catalog.warranty : service?.warranty);
     dialog('服务保障', facts([
       ['规范服务', '师傅身份核验，服务过程按订单留痕'],
       ['费用确认', '服务前确认报价，增项另行确认'],
