@@ -42,7 +42,7 @@
     ['新增服务项目', '超出所选服务范围的项目，需单独报价并经您确认。'],
     ['特殊时段服务', '夜间、节假日等附加费，以预约时的订单明细为准。'],
     ['远距离上门', '超出标准服务距离时，按实际里程核算并提前告知。'],
-    ['高空及特殊作业', '涉及高空等特殊条件时，先确认作业方案与费用。'],
+    
     ['垃圾清运', '如需额外清运施工垃圾，按实际清运量确认费用。']
   ];
   const advantages = [
@@ -55,7 +55,7 @@
     hood: ['hood', 'washer', 'ac', 'fridge', 'heater'], cleaning: ['cleaning', 'washer', 'hood', 'ac', 'organizing'],
     faucet: ['faucet', 'pipe', 'drain', 'waterproof', 'socket'], valve: ['faucet', 'pipe', 'drain', 'waterproof', 'socket'],
     pipe: ['pipe', 'faucet', 'drain', 'waterproof', 'socket'], drain: ['drain', 'pipe', 'faucet', 'waterproof', 'cleaning'],
-    socket: ['socket', 'electric', 'lighting', 'network', 'cabinet'], electric: ['electric', 'socket', 'lighting', 'network', 'cabinet'],
+    socket: ['socket', 'electric', 'lighting', 'faucet', 'cabinet'], electric: ['electric', 'socket', 'lighting', 'faucet', 'cabinet'],
     wall: ['wall', 'painting', 'tile', 'waterproof', 'cabinet'], painting: ['painting', 'tile', 'wall', 'waterproof', 'cabinet'],
     lock: ['lock', 'window', 'cabinet', 'furniture', 'socket'], cabinet: ['cabinet', 'furniture', 'lock', 'curtains', 'organizing']
   };
