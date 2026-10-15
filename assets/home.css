@@ -49,12 +49,11 @@
 .user-app.is-home .home-feature-card .catalog-photo-frame>.service-art {position:absolute;top:22%;left:-8.3333%;width:116.6667%;height:100%;aspect-ratio:1;border-radius:0;-webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.02) 4%,rgba(0,0,0,.1) 9%,rgba(0,0,0,.25) 15%,rgba(0,0,0,.5) 22%,rgba(0,0,0,.75) 29%,rgba(0,0,0,.9) 35%,rgba(0,0,0,.98) 40%,#000 44%);mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.02) 4%,rgba(0,0,0,.1) 9%,rgba(0,0,0,.25) 15%,rgba(0,0,0,.5) 22%,rgba(0,0,0,.75) 29%,rgba(0,0,0,.9) 35%,rgba(0,0,0,.98) 40%,#000 44%);}
 
 .home-ribbon-defs {position:absolute;pointer-events:none;}
-.user-app.is-home .home-content>.section { margin-top:0; padding:12px 13px 6px; background:white; border:1px solid var(--home-border); border-radius:15px; }
-.user-app.is-home .home-content>.section .section-heading { margin-bottom:3px; min-height:44px; }
-.user-app.is-home .home-content>.section .section-heading h2 { position:relative; padding-left:10px; font-size:18px; color:var(--home-ink); }
-.user-app.is-home .home-content>.section .section-heading h2:before { content:''; position:absolute; left:0; top:5px; width:3px; height:17px; border-radius:2px; background:var(--home-orange); }
-.user-app.is-home .home-content>.section .section-heading a { display:flex; align-items:center; min-height:44px; color:#68615b; font-size:11px; }
-.user-app.is-home .home-content>.section .worker-card { padding:13px 0; margin:0; border:0; border-top:1px solid #f3efeb; border-radius:0; }
+/* Nearby workers share the same curved category header and white panel. */
+.user-app.is-home .home-workers-panel .home-group-heading {margin-bottom:0;}
+.user-app.is-home .home-workers-panel .worker-card {padding:13px 2px;margin:0;border:0;border-radius:0;background:transparent;}
+.user-app.is-home .home-workers-panel .worker-card+.worker-card {border-top:1px solid var(--home-border);}
+.user-app.is-home .home-workers-panel .worker-main {min-width:0;}
 .user-app.is-home .worker-card .avatar { background:var(--home-orange-soft); color:#b16d42; }
 .user-app.is-home .worker-card .worker-main h3 { font-size:14px; }
 .user-app.is-home .worker-card .worker-main p { font-size:11px; }
@@ -99,19 +98,6 @@ body[data-app="user"] .repair-entry>a:first-child {width:100%;}
 body[data-app="user"] .category-sidebar button.active:before {background:#ff5000;}
 body[data-app="user"] .catalog-subnav a.active {color:#b63b00;border-color:#ff5000;}
 
-/* Homepage banner sits between search and the four category shortcuts. */
-.user-app.is-home .home-banner-wrap {padding:0 16px 16px;background:#ff5000;}
-.home-banner {display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:156px;padding:20px 18px;border-radius:14px;background:#fff1e7;color:#6d2b0a;overflow:hidden;}
-.home-banner-copy {position:relative;z-index:1;min-width:0;}
-.home-banner-copy>span {font-size:11px;letter-spacing:1px;color:#a83900;}
-.home-banner h2 {font-size:22px;line-height:1.4;font-weight:700;letter-spacing:-.5px;margin:7px 0;color:#9c3300;}
-.home-banner p {font-size:11px;line-height:1.7;margin:0;color:#7d4930;}
-.home-banner strong {display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;margin-top:14px;color:#aa3800;}
-.home-banner-mark {flex:none;color:#ff5000;opacity:.7;transform:rotate(-8deg);margin-right:-20px;}
-.home-banner:focus-visible {outline:3px solid #6d2b0a;outline-offset:3px;}
-@media(max-width:360px){.user-app.is-home .home-banner-wrap{padding-inline:12px}.home-banner{padding:18px 14px;min-height:148px}.home-banner h2{font-size:20px}.home-banner-mark{margin-right:-36px;opacity:.3}}
-
-
 .catalog-photo-frame {position:relative;aspect-ratio:1;overflow:hidden;border-radius:9px;}
 
 @media(max-width:360px){
@@ -122,4 +108,30 @@ body[data-app="user"] .catalog-subnav a.active {color:#b63b00;border-color:#ff50
  .user-app.is-home .home-group-note{font-size:9px;padding-inline:4px;}
  .user-app.is-home .home-service-group .catalog-grid{gap:6px;}
  .user-app.is-home .home-feature-card h3{font-size:13px;top:10px;}
+}
+
+/* A coupon-shaped first-order offer at the end of the homepage. */
+.user-app.is-home .home-promo {position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr)105px;align-items:center;gap:12px;overflow:hidden;margin:0 0 14px;padding:18px 15px;border:1px solid #ffc594;border-radius:15px;background:linear-gradient(110deg,#fff0de 0%,#ffe0be 100%);}
+.home-promo-copy {min-width:0;}
+.home-promo-label {display:inline-block;font-size:11px;line-height:1.5;font-weight:600;letter-spacing:.5px;color:#a63900;}
+.user-app.is-home .home-promo h2 {display:flex;align-items:baseline;gap:6px;margin:6px 0 4px;font-size:20px;line-height:1.25;font-weight:700;color:#80320b;white-space:nowrap;}
+.home-promo-amount {display:inline-flex;align-items:baseline;gap:2px;font-family:var(--numbers);font-size:43px;line-height:1;font-weight:750;letter-spacing:-2px;color:#c83e00;}
+.home-promo-amount small {color:inherit;font-size:16px;font-weight:650;letter-spacing:0;}
+.home-promo-copy p {font-size:12px;line-height:1.7;color:#7d4a29;}
+.home-promo-condition {display:block;margin-top:4px;font-size:10px;line-height:1.5;color:#855d40;}
+.home-promo-action {align-self:stretch;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:1px dashed #e8ac7b;padding-left:12px;}
+.home-promo:before,.home-promo:after {content:'';position:absolute;right:112px;width:14px;height:14px;border:1px solid #ffc594;border-radius:50%;background:#f5f5f7;}
+.home-promo:before {top:-8px;}
+.home-promo:after {bottom:-8px;}
+.home-promo-cta {display:flex;align-items:center;justify-content:center;gap:3px;width:100%;min-height:44px;padding:8px;border:1px solid #c43c00;border-radius:22px;background:#ce4000;color:#fff;font-size:13px;font-weight:600;box-shadow:0 4px 9px #b441001c;}
+.home-promo-cta:hover {background:#b83800;}
+.home-promo-rules {display:flex;align-items:center;justify-content:center;gap:2px;min-height:44px;font-size:10px;color:#794725;}
+@media(max-width:360px){
+ .user-app.is-home .home-promo{grid-template-columns:minmax(0,1fr)92px;gap:9px;padding:16px 12px;}
+ .user-app.is-home .home-promo h2{font-size:18px;gap:4px;}
+ .home-promo-amount{font-size:38px;}
+ .home-promo-copy p{font-size:11px;}
+ .home-promo-action{padding-left:9px;}
+ .home-promo:before,.home-promo:after{right:97px;}
+ .home-promo-cta{font-size:12px;gap:2px;padding-inline:6px;}
 }

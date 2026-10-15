@@ -33,21 +33,23 @@ const catalogDetail=item=>{
 A['reserve-catalog']=el=>{const item=findCatalogService(el.dataset.id);if(!item?.serviceId||App.state.serviceDisabled?.includes(item.serviceId)){toast('请先咨询确认服务范围');return;}App.state.serviceId=item.serviceId;App.state.specification=0;App.state.serviceAddon=false;App.state.couponId=null;App.state.couponSelectionTouched=false;App.save();A['reserve-service']();};
 const homeSearch=()=>`<div class="service-search"><button class="search-city" data-action="city">${e(App.state.city)}市${icon('down',11)}</button><a class="home-search-placeholder" href="#/search">${icon('search',16)}<span>搜索您需要的服务</span></a><a class="home-search-submit" href="#/search" aria-label="搜索服务">搜索</a></div>`;
 const homeGroupBenefits={'局改焕新':'按需改造｜规范施工｜完工验收','维修服务':'先报价｜再维修｜售后保障','定制服务':'按需设计｜收纳优化｜明细报价','安装服务':'规范安装｜完工调试｜售后保障'};
+const homePanelHeading=(title,note,href)=>`<div class="home-group-heading"><h2><span>${e(title)}</span></h2><a class="home-group-more" href="${href}" aria-label="查看全部${e(title)}"><span class="home-group-note">${e(note)}</span>${icon('arrow',14)}</a></div>`;
 const homeFeatureTile=item=>`<a class="catalog-tile home-feature-card" data-catalog-id="${item.id}" href="#/service?catalog=${item.id}" title="${e(item.name)}"><h3>${e(catalogCardNames[item.name]||item.name)}</h3>${catalogPhoto(item)}</a>`;
 const homeGroup=category=>{
  const items=visibleCatalog().filter(s=>s.category===category.name),picks=category.groups.slice(0,3).map(group=>items.find(s=>s.group===group)).filter(Boolean);
  for(const item of items){if(picks.length>=3)break;if(!picks.includes(item))picks.push(item);}
- return `<section class="home-service-group"><div class="home-group-heading"><h2><span>${e(category.name)}</span></h2><a class="home-group-more" href="#/categories?category=${encodeURIComponent(category.name)}" aria-label="查看全部${e(category.name)}"><span class="home-group-note">${e(homeGroupBenefits[category.name])}</span>${icon('arrow',14)}</a></div><div class="catalog-grid">${picks.map(homeFeatureTile).join('')}</div></section>`;
+ return `<section class="home-service-group">${homePanelHeading(category.name,homeGroupBenefits[category.name],'#/categories?category='+encodeURIComponent(category.name))}<div class="catalog-grid">${picks.map(homeFeatureTile).join('')}</div></section>`;
 };
 V.home=()=>mobilePage('首页',`
  <svg class="home-ribbon-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><clipPath id="home-heading-ribbon" clipPathUnits="objectBoundingBox"><path d="M0,0 H1 C.84,0 .84,.22 .80,.49 C.76,.78 .67,.82 .54,.82 H.10 C.05,.82 .01,.89 0,1 Z"/></clipPath></defs></svg>
  <div class="home-search">${homeSearch()}</div>
- <div class="home-banner-wrap"><a class="home-banner" href="#/categories" aria-label="查看宅好住四大服务"><div class="home-banner-copy"><span>宅好住 · 家修管家</span><h2>家的焕新，从这里开始</h2><p>局改焕新 / 维修 / 定制 / 安装</p><strong>查看全部服务 ${icon('arrow',14)}</strong></div><div class="home-banner-mark" aria-hidden="true">${icon('home',80)}</div></a></div>
+
  <section class="home-categories" aria-label="四大服务品类"><div class="category-grid phase1-main-grid">${ZHZ_USER_CATEGORY_TREE.map(c=>`<a class="category-item" href="#/categories?category=${encodeURIComponent(c.name)}"><span class="category-icon">${icon(c.icon,27)}</span><span>${e(c.name)}</span></a>`).join('')}</div><div class="trust-strip"><span>${icon('shield',13)}实名认证</span><span>${icon('file',13)}先报价后服务</span><span>${icon('check',13)}服务有质保</span></div></section>
  <div class="home-content">
  <div class="repair-entry"><a href="#/repair"><span class="repair-entry-icon">${icon('camera',26)}</span><span class="repair-entry-copy"><strong>拍照报修<span class="repair-entry-ai">·AI 故障识别</span></strong><small>拍张照片，辅助判断故障</small></span>${icon('arrow',15)}</a></div>
  ${ZHZ_USER_CATEGORY_TREE.map(homeGroup).join('')}
- ${section('附近师傅',ZHZ_WORKERS.filter(w=>w.city===App.state.city).slice(0,2).map(w=>workerCard(w)).join(''),'查看全部','workers')}</div>`,'','home',{edge:true});
+ <section class="home-service-group home-workers-panel">${homePanelHeading('附近师傅','实名认证｜服务评价｜就近服务','#/workers')}<div class="home-worker-list">${ZHZ_WORKERS.filter(w=>w.city===App.state.city).slice(0,2).map(w=>workerCard(w)).join('')}</div></section>
+ <section class="home-promo" aria-label="新客首单优惠"><div class="home-promo-copy"><span class="home-promo-label">新客专享 · 首单礼</span><h2>首单立减 <span class="home-promo-amount">20<small>元</small></span></h2><p>让家的小问题，轻松解决</p><small class="home-promo-condition">新客券满100元可用</small></div><div class="home-promo-action"><a class="home-promo-cta" href="#/categories">立即体验${icon('arrow',14)}</a><a class="home-promo-rules" href="#/coupons">查看用券规则${icon('arrow',11)}</a></div></section></div>`,'','home',{edge:true});
 V.login=loginView;
 V.search=()=>{
  const q=App.query.get('q')||'',mode=App.query.get('tab')||'service';
