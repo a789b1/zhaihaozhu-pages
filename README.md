@@ -6,7 +6,7 @@
 - [师傅端](https://a789b1.github.io/zhaihaozhu-pages/worker.html#/home)
 - [管理端](https://a789b1.github.io/zhaihaozhu-pages/admin.html#/dashboard)
 
-用户端 47 页，师傅端 32 页，管理端 37 页。用户端采用已确认的 4 个一级品类、17 个二级分类、89 个服务项目。
+用户端 47 页，师傅端 59 页，管理端 37 页。用户端保留已确认的四大品类页面；师傅端按 PRD V1.2 展示四大业务及 18 个二级服务分类。
 
 所有业务数据均为演示样本；支付、短信、AI 识别等未连接真实服务。页面内的交互仅保存在当前浏览器。
 
