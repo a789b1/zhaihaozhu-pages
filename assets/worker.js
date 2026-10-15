@@ -316,7 +316,7 @@ A['withdraw-submit']=(f,fd)=>{
   if(App.temp.withdrawSubmitting)return;App.temp.withdrawSubmitting=true;submitted=true;
   const id='TX'+Date.now(),rec={id,amount,fee:0,actual:amount,status:'pending',date:W.stamp(),account:account.name+' '+account.number,accountId:account.id,owner:W.owner(),workerId:W.actor(),teamId:W.isLeader()?'team1':undefined,w12Tracked:true,ruleVersion:'1.2',requiresSecond:amount>5000||!account.usedAt||!!account.changedAt};
   App.state.withdrawals.unshift(rec);
-  if(W.owner()==='w1'){App.state.balance=(b.available-c(amount))/100;App.state.frozen=(b.frozen+c(amount))/100;}
+  if(W.owner()==='w1')W.balances();
   W.notify('funds','付款申请已提交','¥'+money(amount)+'，等待财务审核。','withdrawals');
   App.save();App.temp.withdrawAmount='';App.temp.withdrawSubmitting=false;App.go('withdrawals');
  },'提交申请');

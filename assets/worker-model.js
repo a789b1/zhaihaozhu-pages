@@ -194,7 +194,9 @@ function balances(){
  const taken=ws.filter(w=>w.w12Tracked&&!['rejected','cancelled','failed'].includes(w.status)).reduce((a,w)=>a+cents(w.amount),0);
  const reserved=ws.filter(w=>['pending','second','approved','processing','remitted'].includes(w.status)).reduce((a,w)=>a+cents(w.amount),0);
  const sum=status=>rows.filter(l=>l.status===status).reduce((a,l)=>a+l.amount,0);
- return {available:Math.max(0,sum('available')-taken),pending:sum('pending'),frozen:sum('frozen')+reserved,paid:sum('paid')+ws.filter(w=>w.status==='paid').reduce((a,w)=>a+cents(w.actual),0),estimated:jobs().filter(active).reduce((a,o)=>a+(estimate(o)||0),0)};
+ const result={available:Math.max(0,sum('available')-taken),pending:sum('pending'),frozen:sum('frozen')+reserved,paid:sum('paid')+ws.filter(w=>w.status==='paid').reduce((a,w)=>a+cents(w.actual),0),estimated:jobs().filter(active).reduce((a,o)=>a+(estimate(o)||0),0)};
+ if(owner()==='w1'&&(cents(App.state.balance)!==result.available||cents(App.state.frozen)!==result.frozen)){App.state.balance=result.available/100;App.state.frozen=result.frozen/100;App.save();}
+ return result;
 }
 function quoteCheck(o,q){
  const labor=cents(q.labor),baseReference=cents(o.referenceLabor||o.quote?.labor||0);let reference=baseReference,missing=false;
