@@ -1,0 +1,1 @@
+import{d as s,c as a,w as t,i as e,j as r,l as n,t as o,u}from"./index-fBQHIKBh.js";import{u as c}from"./catalog-redirect.B6PP3NYA.js";const d=s({__name:"index",setup(s){const d=c();return(s,c)=>{const i=e;return r(),a(i,null,{default:t(()=>[n(o(u(d)||"正在打开全部服务…"),1)]),_:1})}}});export{d as default};
