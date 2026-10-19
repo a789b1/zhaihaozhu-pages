@@ -9,3 +9,5 @@
 `index.html`、`user.html`、`worker.html` 和 `admin-preview/` 由开发项目的 `pnpm build:prototype` 生成。生成清单与 SHA-256 见 `.generated-preview.json`。更新先修改共享源码，再构建并同步本目录；不要手改生成的 JS/CSS。使用相对资源地址与 hash 路由，支持 GitHub Pages 子目录部署；`.nojekyll` 必须保留。
 
 `legacy-user.html`、`legacy-worker.html`、`legacy-admin.html` 和原 `assets` 手工文件仅保留为旧版设计档案；现行入口以上方三个链接为准。
+
+服务详情已按参考图采用大图、方案、保障/地区、报价流程、分区说明与固定预约栏；点击预约进入原确认页。服务名称不附加开发测试标记，合成来源保留在内部元数据中。
